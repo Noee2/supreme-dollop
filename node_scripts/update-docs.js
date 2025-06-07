@@ -59,10 +59,10 @@ function parseMarkdownTable(content) {
 function updateMarkdownPage(jsonPath, mdPath) {
   const isMainnet = mdPath.includes("mainnet");
   // Lire les données JSON
-  const jsonData = JSON.parse(fs.readFileSync("../" + jsonPath, "utf8"));
+  const jsonData = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
 
   // Lire le fichier Markdown existant
-  const mdContent = fs.readFileSync("../" + mdPath, "utf8");
+  const mdContent = fs.readFileSync(mdPath, "utf8");
 
   // Parser le tableau existant
   const table = parseMarkdownTable(mdContent);
@@ -119,15 +119,15 @@ function updateMarkdownPage(jsonPath, mdPath) {
   console.log(`Mise à jour de ${mdPath} avec les données de ${jsonPath}`);
 
   // Écrire le fichier mis à jour
-  fs.writeFileSync("../" + mdPath, newContent);
-  console.log(`✅ ${"../" + mdPath} mis à jour avec ${Object.keys(jsonData).length} contrats`);
+  fs.writeFileSync(mdPath, newContent);
+  console.log(`✅ ${mdPath} mis à jour avec ${Object.keys(jsonData).length} contrats`);
 }
 
 // Fonction principale
 function main() {
-  // const changedFiles = process.argv[2];
+  const changedFiles = process.argv[2];
   // const changedFiles = "config/sepolia.json";
-  const changedFiles = "config/polygon.json";
+  // const changedFiles = "config/polygon.json";
 
   if (!changedFiles || changedFiles.trim() === "") {
     console.log("Aucun fichier JSON modifié");
