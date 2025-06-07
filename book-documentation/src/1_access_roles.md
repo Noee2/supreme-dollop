@@ -1,6 +1,6 @@
 # Access Roles
 
-Provides a global overview of the roles in the project. SUPER
+Provides a global overview of the roles in the project. SUPERSUPER
 
 | Role            |                          Description                           |                                      Address |
 | :-------------- | :------------------------------------------------------------: | -------------------------------------------: |
