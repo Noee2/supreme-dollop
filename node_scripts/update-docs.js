@@ -4,8 +4,13 @@ const path = require("path");
 
 // Mapping des fichiers JSON vers les pages Markdown
 const FILE_MAPPING = {
-  "config/sepolia.json": "book-documentation/src/2.1_deployment_addresses.testnet.md",
-  "config/polygon.json": "book-documentation/src/2.2_deployment_addresses.mainnet.md",
+  "config/sepolia.json": "book-documentation/src/2.1_testnet.md",
+  "config/polygon.json": "book-documentation/src/2.2_mainnet.md",
+};
+
+const URL = {
+  mainnet: "https://basescan.org/address/",
+  testnet: "https://sepolia.basescan.org/address/",
 };
 
 // Fonction pour convertir timestamp en date lisible
@@ -13,15 +18,18 @@ function formatTimestamp(timestamp) {
   const date = new Date(timestamp * 1000);
   return date.toLocaleDateString("fr-FR", {
     year: "numeric",
-    month: "long",
-    day: "numeric",
+    month: "2-digit",
+    day: "2-digit",
   });
 }
 
 // Fonction pour parser un tableau Markdown
 function parseMarkdownTable(content) {
   const lines = content.split("\n");
-  const tableStart = lines.findIndex((line) => line.includes("| Contract | Address | Last Update |"));
+  const tableStart = lines.findIndex(
+    (line) =>
+      line.includes("Contract") && line.includes("Address") && line.includes("Last Update") && line.includes("|")
+  );
 
   if (tableStart === -1) {
     throw new Error("Tableau non trouvé dans le fichier Markdown");
@@ -49,13 +57,12 @@ function parseMarkdownTable(content) {
 
 // Fonction pour mettre à jour une page Markdown
 function updateMarkdownPage(jsonPath, mdPath) {
-  console.log(`Mise à jour de ${mdPath} avec les données de ${jsonPath}`);
-
+  const isMainnet = mdPath.includes("mainnet");
   // Lire les données JSON
-  const jsonData = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
+  const jsonData = JSON.parse(fs.readFileSync("../" + jsonPath, "utf8"));
 
   // Lire le fichier Markdown existant
-  const mdContent = fs.readFileSync(mdPath, "utf8");
+  const mdContent = fs.readFileSync("../" + mdPath, "utf8");
 
   // Parser le tableau existant
   const table = parseMarkdownTable(mdContent);
@@ -82,7 +89,14 @@ function updateMarkdownPage(jsonPath, mdPath) {
 
   Object.entries(jsonData).forEach(([contractName, data]) => {
     const formattedDate = formatTimestamp(data.timestamp);
-    const newRow = `| ${contractName} | ${data.address} | ${formattedDate} |`;
+
+    let newRow;
+
+    if (isMainnet) {
+      newRow = `| ${contractName} | [${data.address}](${URL.mainnet}${data.address}) | ${formattedDate} |`;
+    } else {
+      newRow = `| ${contractName} | [${data.address}](${URL.testnet}${data.address}) | ${formattedDate} |`;
+    }
 
     if (existingContracts.has(contractName)) {
       // Mettre à jour le contrat existant à sa position
@@ -102,14 +116,18 @@ function updateMarkdownPage(jsonPath, mdPath) {
     "\n"
   );
 
+  console.log(`Mise à jour de ${mdPath} avec les données de ${jsonPath}`);
+
   // Écrire le fichier mis à jour
-  fs.writeFileSync(mdPath, newContent);
-  console.log(`✅ ${mdPath} mis à jour avec ${Object.keys(jsonData).length} contrats`);
+  fs.writeFileSync("../" + mdPath, newContent);
+  console.log(`✅ ${"../" + mdPath} mis à jour avec ${Object.keys(jsonData).length} contrats`);
 }
 
 // Fonction principale
 function main() {
-  const changedFiles = process.argv[2];
+  // const changedFiles = process.argv[2];
+  // const changedFiles = "config/sepolia.json";
+  const changedFiles = "config/polygon.json";
 
   if (!changedFiles || changedFiles.trim() === "") {
     console.log("Aucun fichier JSON modifié");
