@@ -1,0 +1,54 @@
+name: Update Documentation
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "config/*.json" # Se déclenche uniquement sur les modifications JSON
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Pour comparer avec le commit précédent
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Get changed files
+        id: changed-files
+        run: |
+          echo "changed_files=$(git diff --name-only HEAD~1 HEAD | grep 'config/.*\.json$' | tr '\n' ' ')" >> $GITHUB_OUTPUT
+
+      - name: Update documentation
+        run: node node_scripts/update-docs.js "${{ steps.changed-files.outputs.changed_files }}"
+
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v1
+        with:
+          mdbook-version: "latest"
+
+      - name: Build book
+        working-directory: ./book-documentation
+        run: mdbook build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ./book-documentation/book
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2

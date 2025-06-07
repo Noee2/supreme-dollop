@@ -1,0 +1,14 @@
+{
+  "MyTokenSepolia": {
+    "address": "0x1234567890abcdef1234567890abcdef12345678",
+    "timestamp": 1704067200
+  },
+  "MyNFTSepolia": {
+    "address": "0xabcdef1234567890abcdef1234567890abcdef12",
+    "timestamp": 1704153600
+  },
+  "StakingSepolia": {
+    "address": "0x567890abcdef1234567890abcdef1234567890ab",
+    "timestamp": 1704240000
+  }
+}

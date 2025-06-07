@@ -1,44 +1,44 @@
-name: mdBook Build and Deploy
+# name: mdBook Build and Deploy
 
-on:
-  push:
-    branches:
-      - master # Déclenche le workflow sur un push vers la branche master
+# on:
+#   push:
+#     branches:
+#       - master # Déclenche le workflow sur un push vers la branche master
 
-permissions:
-  contents: read
-  pages: write # Nécessaire pour écrire sur GitHub Pages
-  id-token: write # Nécessaire pour l'authentification OIDC avec GitHub Pages
+# permissions:
+#   contents: read
+#   pages: write # Nécessaire pour écrire sur GitHub Pages
+#   id-token: write # Nécessaire pour l'authentification OIDC avec GitHub Pages
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    environment: # Configure l'environnement pour le déploiement sur GitHub Pages
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }} # URL de la page déployée
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4 # Récupère le code de votre dépôt
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+#     environment: # Configure l'environnement pour le déploiement sur GitHub Pages
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }} # URL de la page déployée
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v4 # Récupère le code de votre dépôt
 
-      - name: Setup mdBook
-        uses: peaceiris/actions-mdbook@v1 # Installe mdBook
-        with:
-          mdbook-version: "latest" # Utilise la dernière version de mdBook
+#       - name: Setup mdBook
+#         uses: peaceiris/actions-mdbook@v1 # Installe mdBook
+#         with:
+#           mdbook-version: "latest" # Utilise la dernière version de mdBook
 
-      - name: Build mdBook
-        working-directory: ./book-documentation # Définit le répertoire de travail
-        run: mdbook build # Construit le livre depuis le répertoire book-documentation
-        # Le résultat de la construction sera dans ./book-documentation/book/
+#       - name: Build mdBook
+#         working-directory: ./book-documentation # Définit le répertoire de travail
+#         run: mdbook build # Construit le livre depuis le répertoire book-documentation
+#         # Le résultat de la construction sera dans ./book-documentation/book/
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5 # Configure GitHub Pages pour le déploiement
+#       - name: Setup Pages
+#         uses: actions/configure-pages@v5 # Configure GitHub Pages pour le déploiement
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3 # Télécharge l'artefact de la page
-        with:
-          # Télécharge le contenu du répertoire de construction de mdBook
-          path: ./book-documentation/book
+#       - name: Upload artifact
+#         uses: actions/upload-pages-artifact@v3 # Télécharge l'artefact de la page
+#         with:
+#           # Télécharge le contenu du répertoire de construction de mdBook
+#           path: ./book-documentation/book
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4 # Déploie sur GitHub Pages
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: actions/deploy-pages@v4 # Déploie sur GitHub Pages
