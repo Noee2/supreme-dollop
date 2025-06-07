@@ -21,7 +21,7 @@ function formatTimestamp(timestamp) {
 // Fonction pour parser un tableau Markdown
 function parseMarkdownTable(content) {
   const lines = content.split("\n");
-  const tableStart = lines.findIndex((line) => line.includes("|Contract|Address|Last Update|"));
+  const tableStart = lines.findIndex((line) => line.includes("| Contract | Address | Last Update |"));
 
   if (tableStart === -1) {
     throw new Error("Tableau non trouvé dans le fichier Markdown");
