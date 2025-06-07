@@ -4,8 +4,8 @@ const path = require("path");
 
 // Mapping des fichiers JSON vers les pages Markdown
 const FILE_MAPPING = {
-  "config/sepolia.json": "book-documentation/src/2.1_testnet.md",
-  "config/polygon.json": "book-documentation/src/2.2_mainnet.md",
+  "config/base_sepolia.json": "gitbook/src/2.1_testnet.md",
+  "config/base.json": "gitbook/src/2.2_mainnet.md",
 };
 
 const URL = {

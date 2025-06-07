@@ -5,7 +5,7 @@ on:
     branches: [master]
     paths:
       - "config/*.json" # Se déclenche uniquement sur les modifications JSON
-      - "book-documentation/**" # Se déclenche sur les modifications dans le répertoire de documentation
+      - "gitbook/**" # Se déclenche sur les modifications dans le répertoire de documentation
 
 jobs:
   update-docs:
@@ -39,7 +39,7 @@ jobs:
           mdbook-version: "latest"
 
       - name: Build book
-        working-directory: ./book-documentation
+        working-directory: ./gitbook
         run: mdbook build
 
       - name: Setup Pages
@@ -48,7 +48,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./book-documentation/book
+          path: ./gitbook/book
 
       - name: Deploy to GitHub Pages
         id: deployment

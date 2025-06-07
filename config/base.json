@@ -7,8 +7,5 @@
     "address": "0xabcdef1234567890abcdef1234567890abcdef12",
     "timestamp": 1704153601
   },
-  "Staking": {
-    "address": "0x567890abcdef1234567890abcdef1234567890ab",
-    "timestamp": 1704240001
-  }
+  "Staking": "{'address':0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f, 'lastUpdate': 1749320781}"
 }

@@ -30,3 +30,22 @@ table td:nth-child(3) {
   width: 15%; /* Réduit la largeur pour la colonne des dates courtes */
   /* text-align: right; */ /* Décommentez si vous préférez les dates alignées à droite */
 }
+
+/* Première colonne (par ex. Nom du Contrat) */
+.roles-table th:nth-child(1),
+.roles-table td:nth-child(1) {
+  width: 20%; /* Un peu plus d'espace pour les noms de contrat potentiellement longs */
+}
+
+/* Deuxième colonne (par ex. Adresse - la colonne du milieu) */
+.roles-table th:nth-child(2),
+.roles-table td:nth-child(2) {
+  width: 40%; /* Alloue la majorité de l'espace à la colonne des adresses */
+}
+
+/* Troisième colonne (par ex. Date de mise à jour) */
+.roles-table th:nth-child(3),
+.roles-table td:nth-child(3) {
+  width: 40%; /* Réduit la largeur pour la colonne des dates courtes */
+  /* text-align: right; */ /* Décommentez si vous préférez les dates alignées à droite */
+}
