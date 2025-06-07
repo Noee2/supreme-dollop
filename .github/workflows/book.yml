@@ -23,10 +23,11 @@ jobs:
       - name: Setup mdBook
         uses: peaceiris/actions-mdbook@v1 # Installe mdBook
         with:
-          mdbook-version: 'latest' # Utilise la dernière version de mdBook
+          mdbook-version: "latest" # Utilise la dernière version de mdBook
 
       - name: Build mdBook
-        run: mdbook build book-documentation # Construit le livre mdBook
+        working-directory: ./book-documentation # Définit le répertoire de travail
+        run: mdbook build # Construit le livre depuis le répertoire book-documentation
         # Le résultat de la construction sera dans ./book-documentation/book/
 
       - name: Setup Pages
