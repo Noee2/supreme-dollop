@@ -5,10 +5,10 @@
   },
   "MyNFT": {
     "address": "0xabcdef1234567890abcdef1234567890abcdef12",
-    "timestamp": 1704153600
+    "timestamp": 1704153602
   },
   "Staking": {
     "address": "0x567890abcdef1234567890abcdef1234567890ab",
-    "timestamp": 1704240000
+    "timestamp": 1704240001
   }
 }
