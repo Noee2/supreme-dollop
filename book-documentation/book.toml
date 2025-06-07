@@ -4,3 +4,6 @@ language = "en"
 src = "src"
 title = "Protocol documentation"
 theme = "ayu"
+
+[output.html]
+additional-css = ["theme/custom.css"]

@@ -1,0 +1,32 @@
+table {
+  width: 100%;
+  table-layout: fixed;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+table th,
+table td {
+  overflow-wrap: break-word;
+  padding: 0.5em; /* Ajoute un peu d'espacement interne */
+  text-align: left; /* Alignement par défaut du texte */
+}
+
+/* Première colonne (par ex. Nom du Contrat) */
+table th:nth-child(1),
+table td:nth-child(1) {
+  width: 20%; /* Un peu plus d'espace pour les noms de contrat potentiellement longs */
+}
+
+/* Deuxième colonne (par ex. Adresse - la colonne du milieu) */
+table th:nth-child(2),
+table td:nth-child(2) {
+  width: 55%; /* Alloue la majorité de l'espace à la colonne des adresses */
+}
+
+/* Troisième colonne (par ex. Date de mise à jour) */
+table th:nth-child(3),
+table td:nth-child(3) {
+  width: 15%; /* Réduit la largeur pour la colonne des dates courtes */
+  /* text-align: right; */ /* Décommentez si vous préférez les dates alignées à droite */
+}

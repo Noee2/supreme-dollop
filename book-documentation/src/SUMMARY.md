@@ -5,8 +5,8 @@
 - [Protocol Overview](./0_protocol_overview.md)
 - [Access Roles](./1_access_roles.md)
 - [Deployment Addresses](./2_deployment_addresses.md)
-  - [Testnet](./2.1_deployment_addresses.tesnet.md)
-  - [Mainnet](./2.2_deployment_addresses.mainnet.md)
+  - [Testnet](./2.1_testnet.md)
+  - [Mainnet](./2.2_mainnet.md)
 
 # Contracts
 

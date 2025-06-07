@@ -5,6 +5,7 @@ on:
     branches: [master]
     paths:
       - "config/*.json" # Se déclenche uniquement sur les modifications JSON
+      - "book-documentation/**" # Se déclenche sur les modifications dans le répertoire de documentation
 
 jobs:
   update-docs:
